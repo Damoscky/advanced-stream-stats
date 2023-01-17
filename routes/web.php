@@ -17,9 +17,11 @@ use App\Http\Controllers\PagesController;
 Route::get('/', [PagesController::class, 'index'])->name('auth.index');
 Route::get('/login-page', [PagesController::class, 'loginPage'])->name('auth.login');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::group(['prefix' => 'auth', 'namespace' => 'v1\Auth'], function () {
+    Route::post('/signup', [RegisterController::class, 'register']);
+    Route::post('login', [LoginController::class, 'login']);
+    Route::get('logout', [LoginController::class, 'logout'])->middleware("auth:web");
+});
 
 Auth::routes();
 

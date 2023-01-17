@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        jeremykenedy\LaravelRoles\RolesServiceProvider::class,
+        // Laralabs\Toaster\ToasterServiceProvider::class,
 
         /*
          * Application Service Providers...
