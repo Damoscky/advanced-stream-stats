@@ -46,14 +46,15 @@
 
                     <h4 class="text-dark mb-6 text-center">Sign in</h4>
 
-                    <form action="#">
+                    <form action="{{route('auth.login')}}" method="POST">
+                        @csrf
                       <div class="row">
                         <div class="form-group col-md-12 mb-4">
-                          <input type="email" class="form-control input-lg" id="email" aria-describedby="emailHelp"
+                          <input type="email" class="form-control input-lg" name="email" id="email" aria-describedby="emailHelp"
                             placeholder="email">
                         </div>
                         <div class="form-group col-md-12 ">
-                          <input type="password" class="form-control input-lg" id="password" placeholder="Password">
+                          <input type="password" class="form-control input-lg" name="password" id="password" placeholder="Password">
                         </div>
                         <div class="col-md-12">
 

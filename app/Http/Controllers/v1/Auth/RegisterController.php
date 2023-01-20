@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\v1\Auth;
 
+use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Helpers\ProcessAuditLog;
+use App\Interfaces\RoleInterface;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Responser\JsonResponser;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateUserRequest;
 use App\Repositories\RegisterRepository;
-use App\Interfaces\RoleInterface;
-use App\Helpers\ProcessAuditLog;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use App\Models\User;
-use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -37,7 +38,7 @@ class RegisterController extends Controller
     /**
      * Store user
      */
-    public function register(CreateUserRequest $request)
+    public function register(Request $request)
     {
 
         try {
@@ -47,12 +48,11 @@ class RegisterController extends Controller
                 "firstname" => $request->firstname,
                 "email" => $request->email,
                 "phoneno" => $request->phoneno,
-                "companyName" => $request->companyName,
                 "password" => Hash::make($request->password),
             ]);
             if(!$user){
                 return 1234;
-                toaster()->add('Add message here')->error();
+                // toaster()->add('Add message here')->error();
 
             }
 

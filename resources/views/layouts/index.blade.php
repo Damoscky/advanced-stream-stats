@@ -26,7 +26,7 @@
 
   <script src="{{asset("assets")}}/plugins/nprogress/nprogress.js"></script>
 </head>
-    @toaster
+
 </head>
 
 

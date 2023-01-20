@@ -15,7 +15,7 @@
         "jeremykenedy/laravel-roles": "^9.0",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laralabs/toaster": "~3.0.0"
+        "yoeunes/toastr": "^2.3"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

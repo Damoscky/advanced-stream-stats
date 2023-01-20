@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\v1\Auth\LoginController;
+use App\Http\Controllers\v1\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +17,14 @@ use App\Http\Controllers\PagesController;
 */
 
 Route::get('/', [PagesController::class, 'index'])->name('auth.index');
-Route::get('/login-page', [PagesController::class, 'loginPage'])->name('auth.login');
+Route::get('/login-page', [PagesController::class, 'loginPage'])->name('login-page');
 
 Route::group(['prefix' => 'auth', 'namespace' => 'v1\Auth'], function () {
-    Route::post('/signup', [RegisterController::class, 'register']);
-    Route::post('login', [LoginController::class, 'login']);
-    Route::get('logout', [LoginController::class, 'logout'])->middleware("auth:web");
+    Route::post('/signup', [RegisterController::class, 'register'])->name('auth.register');
+    Route::post('login', [LoginController::class, 'login'])->name('auth.login');
+    Route::get('logout', [LoginController::class, 'logout'])->name('auth.logout');
 });
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
