@@ -11,13 +11,8 @@
 
 ## Application Overview
 
-This application uses PHP 7.4. [Composer]
-is used to install dependencies, and [PHPUnit] is used for automated tests. The
-entry point for the application is `bin/count-starred-repositories`. The
-[php-github-api] package is included, and should be used for connecting to the
-GitHub API. The `vendor` folder contains external packages which are pulled into
-the project by composer. The [php-github-api] package will be in
-`vendor\knplabs\github-api`.
+This application uses PHP 7.4. [Composer] is used to install dependencies
+
 
 ## Installation
 
