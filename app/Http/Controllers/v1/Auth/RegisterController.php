@@ -51,8 +51,7 @@ class RegisterController extends Controller
                 "password" => Hash::make($request->password),
             ]);
             if(!$user){
-                return 1234;
-                // toaster()->add('Add message here')->error();
+                toaster()->error('Record not created', 'Error occured')->error();
 
             }
 
@@ -88,17 +87,13 @@ class RegisterController extends Controller
             //send email to verify account
 
             DB::commit();
+            toastr()->success("Account created successfully. Kindly check your email for verification link", 'Account Created');
+            return view('login');
 
-            $error = false;
-            $message = "Account created successfully. Kindly check your email for verification link";
-            $data = $user;
-            return JsonResponser::send($error, $message, $data);
+
+
         } catch (\Throwable $th) {
             DB::rollback();
-            $error = true;
-            $message = $th->getMessage();
-            $data = [];
-            return JsonResponser::send($error, $message, $data);
         }
     }
 

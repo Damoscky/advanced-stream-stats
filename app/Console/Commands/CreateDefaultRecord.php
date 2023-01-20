@@ -2,14 +2,15 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Interfaces\UserStatusInterface;
+use Carbon\Carbon;
+use App\Models\Plan;
 use App\Models\User;
 use App\Models\Company;
-use App\Models\SubscriptionPlan;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
+use Illuminate\Console\Command;
+use App\Models\SubscriptionPlan;
 use Illuminate\Support\Facades\DB;
+use App\Interfaces\UserStatusInterface;
 
 class CreateDefaultRecord extends Command
 {
@@ -34,6 +35,28 @@ class CreateDefaultRecord extends Command
      */
     public function handle()
     {
+
+        $plans = [
+            [
+                'created_by' => 1,
+                'name' => 'Gold',
+                'description' => 'All the basics for starting a new business',
+                'price' => "50",
+                'period' => "Monthly",
+                'content' => "Potenti felis, in cras at at ligula nunc. Orci neque eget pellentesque. Donec mauris sit in eu tincidunt etiam.",
+            ],
+
+            [
+                'created_by' => 1,
+                'name' => 'Premium',
+                'description' => 'All the basics for starting a new business',
+                'price' => "70",
+                'period' => "Yearly",
+                'content' => "Potenti felis, in cras at at ligula nunc. Orci neque eget pellentesque. Donec mauris sit in eu tincidunt etiam.",
+            ],
+
+
+        ];
 
         $RoleItems = [
 
@@ -204,5 +227,20 @@ class CreateDefaultRecord extends Command
         }
 
         dump("User table seeder ran successfully");
+
+        foreach ($plans as $key => $value) {
+            $checkIfRecordExist = Plan::where('name', $value['name'])->first();
+            if(is_null($checkIfRecordExist)){
+                $plan = Plan::create([
+                    'name' => $value['name'],
+                    'price' => $value['price'],
+                    'content' => $value['content'],
+                    'created_by' => $value['created_by'],
+                    'period' => $value['period'],
+                    'description' => $value['description'],
+                ]);
+            }
+        }
+        dump("Plans table seeder ran successfully");
     }
 }

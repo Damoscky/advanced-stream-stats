@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\v1\Auth\LoginController;
 use App\Http\Controllers\v1\Auth\RegisterController;
+use App\Http\Controllers\v1\User\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,11 @@ Route::group(['prefix' => 'auth', 'namespace' => 'v1\Auth'], function () {
     Route::post('/signup', [RegisterController::class, 'register'])->name('auth.register');
     Route::post('login', [LoginController::class, 'login'])->name('auth.login');
     Route::get('logout', [LoginController::class, 'logout'])->name('auth.logout');
+});
+
+Route::group(['prefix' => 'user', 'namespace' => 'v1\User', "middleware" => ["auth:web", "user"] ], function () {
+    Route::get('/index', [SubscriptionController::class, 'Userindex'])->name('user.index');
+    Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
 });
 
 // Auth::routes();
